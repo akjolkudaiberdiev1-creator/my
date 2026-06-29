@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>3D Сайт</title>
+    <style>
+        /* Сброс и базовые стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle at center, #1a1a2e, #16213e);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            perspective: 1000px; /* Глубина для 3D */
+        }
+
+        /* Контейнер для всей 3D-сцены */
+        .scene {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateScene 12s infinite linear;
+        }
+
+        /* Сам куб */
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        /* Общие стили для всех граней */
+        .face {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            background: rgba(30, 144, 255, 0.6);
+            backdrop-filter: blur(4px);
+            box-shadow: inset 0 0 50px rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* Каждая грань позиционируется в 3D */
+        .front  { transform: translateZ(150px); background: rgba(255, 99, 132, 0.7); }
+        .back   { transform: rotateY(180deg) translateZ(150px); background: rgba(54, 162, 235, 0.7); }
+        .right  { transform: rotateY(90deg) translateZ(150px); background: rgba(255, 206, 86, 0.7); }
+        .left   { transform: rotateY(-90deg) translateZ(150px); background: rgba(75, 192, 192, 0.7); }
+        .top    { transform: rotateX(90deg) translateZ(150px); background: rgba(153, 102, 255, 0.7); }
+        .bottom { transform: rotateX(-90deg) translateZ(150px); background: rgba(255, 159, 64, 0.7); }
+
+        /* Эффект при наведении на грань */
+        .face:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.3);
+            border-color: #fff;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Анимация вращения всей сцены */
+        @keyframes rotateScene {
+            0%   { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        /* Текст внутри граней (можно заменить на иконки) */
+        .face span {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px 24px;
+            border-radius: 40px;
+            letter-spacing: 2px;
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Адаптивность для маленьких экранов */
+        @media (max-width: 500px) {
+            .scene, .face {
+                width: 200px;
+                height: 200px;
+            }
+            .front  { transform: translateZ(100px); }
+            .back   { transform: rotateY(180deg) translateZ(100px); }
+            .right  { transform: rotateY(90deg) translateZ(100px); }
+            .left   { transform: rotateY(-90deg) translateZ(100px); }
+            .top    { transform: rotateX(90deg) translateZ(100px); }
+            .bottom { transform: rotateX(-90deg) translateZ(100px); }
+            .face { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="scene">
+        <div class="cube">
+            <div class="face front"><span>Главная</span></div>
+            <div class="face back"><span>О нас</span></div>
+            <div class="face right"><span>Услуги</span></div>
+            <div class="face left"><span>Блог</span></div>
+            <div class="face top"><span>Контакты</span></div>
+            <div class="face bottom"><span>FAQ</span></div>
+        </div>
+    </div>
+
+</body>
+</html>
